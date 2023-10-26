@@ -12,14 +12,15 @@ import { EnginesController } from './engines/engines.controller';
 import { EnginesService } from './engines/engines.service';
 import { EnginesModule } from './engines/engines.module';
 import { UtilisationModule } from './utilisation/utilisation.module';
-import { AbsSbsModule } from './abs_sbs/abs_sbs.module';
+
 import { AdsSbsModule } from './ads_sbs/ads_sbs.module';
 import { AircraftStatusModule } from './aircraft-status/aircraft-status.module';
 import { AppDueModule } from './app-due/app-due.module';
+import { RoleModule } from './role/role.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot(process.env.CLOUD_ATLAS_URL!!, {
+    MongooseModule.forRoot(process.env.mongodb!!, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }),
@@ -30,10 +31,11 @@ import { AppDueModule } from './app-due/app-due.module';
     EngineControlModule,
     EnginesModule,
     UtilisationModule,
-    AbsSbsModule,
+
     AdsSbsModule,
     AircraftStatusModule,
     AppDueModule,
+    RoleModule,
   ],
   controllers: [AppController, EnginesController],
   providers: [AppService, EnginesService],
