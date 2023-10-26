@@ -36,18 +36,6 @@ interface AircraftSpecifications {
   Insurance: Date;
   ReWeigh: Date;
   Radio: string;
-  Content_Type: string;
-  App_Created_By: string;
-  App_Modified_By: string;
-  Workflow_Instance_ID: string;
-  File_Type: string;
-  Modified: Date;
-  Created: Date;
-  Created_By: string;
-  Modified_By: string;
-  URL_Path: string;
-  Path: string;
-  Item_Type: string;
 }
 
 export const aircraftSpecificationsSchema = new Schema<AircraftSpecifications>(
@@ -87,18 +75,6 @@ export const aircraftSpecificationsSchema = new Schema<AircraftSpecifications>(
     Insurance: Date,
     ReWeigh: Date,
     Radio: String,
-    Content_Type: String,
-    App_Created_By: String,
-    App_Modified_By: String,
-    Workflow_Instance_ID: String,
-    File_Type: String,
-    Modified: Date,
-    Created: Date,
-    Created_By: String,
-    Modified_By: String,
-    URL_Path: String,
-    Path: String,
-    Item_Type: String,
   },
   { timestamps: true },
 );

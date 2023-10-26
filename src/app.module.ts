@@ -15,6 +15,7 @@ import { UtilisationModule } from './utilisation/utilisation.module';
 import { AbsSbsModule } from './abs_sbs/abs_sbs.module';
 import { AdsSbsModule } from './ads_sbs/ads_sbs.module';
 import { AircraftStatusModule } from './aircraft-status/aircraft-status.module';
+import { AppDueModule } from './app-due/app-due.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -32,6 +33,7 @@ import { AircraftStatusModule } from './aircraft-status/aircraft-status.module';
     AbsSbsModule,
     AdsSbsModule,
     AircraftStatusModule,
+    AppDueModule,
   ],
   controllers: [AppController, EnginesController],
   providers: [AppService, EnginesService],
