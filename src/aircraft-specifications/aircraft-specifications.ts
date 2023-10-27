@@ -1,8 +1,6 @@
 import { Schema } from 'mongoose';
 
-interface AircraftSpecifications {
-  Title: string;
-  Compliance_Asset_Id: string;
+export interface IAircraftSpecifications {
   acreg: string;
   prev_reg: string;
   manufacturer: string;
@@ -27,7 +25,7 @@ interface AircraftSpecifications {
   prop_manufacturer: string;
   serviceability: string;
   reason_for_use: string;
-  _OldID: string;
+
   Color_Tag: string;
   Forecast: string;
   CofAExpire: Date;
@@ -38,10 +36,8 @@ interface AircraftSpecifications {
   Radio: string;
 }
 
-export const aircraftSpecificationsSchema = new Schema<AircraftSpecifications>(
+export const aircraftSpecificationsSchema = new Schema<IAircraftSpecifications>(
   {
-    Title: String,
-    Compliance_Asset_Id: String,
     acreg: String,
     prev_reg: String,
     manufacturer: String,
@@ -66,7 +62,7 @@ export const aircraftSpecificationsSchema = new Schema<AircraftSpecifications>(
     prop_manufacturer: String,
     serviceability: String,
     reason_for_use: String,
-    _OldID: String,
+
     Color_Tag: String,
     Forecast: String,
     CofAExpire: Date,

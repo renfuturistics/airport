@@ -1,8 +1,6 @@
 import { Schema, model, Document } from 'mongoose';
 
 interface AircraftStatus {
-  Title: string;
-  Compliance_Asset_Id: string;
   acreg: string;
   task_number: string;
   mmreference: string;
@@ -35,27 +33,10 @@ interface AircraftStatus {
   leniency_cycs: number;
   leniency_cal: number;
   apply_leniency: boolean;
-  _OldID: string;
-  Color_Tag: string;
-  Content_Type: string;
-  App_Created_By: string;
-  App_Modified_By: string;
-  Workflow_Instance_ID: string;
-  File_Type: string;
-  Modified: Date;
-  Created: Date;
-  Created_By: string;
-  Modified_By: string;
-  URL_Path: string;
-  Path: string;
-  Item_Type: string;
-  Encoded_Absolute_URL: string;
 }
 export interface IAircraftStatus extends Document, AircraftStatus {}
 export const aircraftStatusSchema = new Schema<AircraftStatus>(
   {
-    Title: String,
-    Compliance_Asset_Id: String,
     acreg: String,
     task_number: String,
     mmreference: String,

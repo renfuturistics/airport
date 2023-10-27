@@ -1,7 +1,6 @@
 import { Schema, model, Document } from 'mongoose';
 
-interface Engine {
-  ID: string;
+export interface IEngine {
   sn: string;
   pn: string;
   eng_type: string;
@@ -14,8 +13,7 @@ interface Engine {
   eng_prop: string;
 }
 
-export const enginesSchema = new Schema<Engine>({
-  ID: String,
+export const enginesSchema = new Schema<IEngine>({
   sn: String,
   pn: String,
   eng_type: String,
