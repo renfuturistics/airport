@@ -25,7 +25,7 @@ interface EngineDetail {
 
 export interface IEngineDetail extends Document, EngineDetail {}
 
-export const engineDetailsSchema = new Schema<EngineDetail>({
+export const EngineDetailsSchema = new Schema<EngineDetail>({
   eng_sn: String,
   eng_pn: String,
   description: String,

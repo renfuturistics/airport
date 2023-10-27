@@ -7,7 +7,7 @@ import { aircraftSpecificationsSchema } from './aircraft-specifications';
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: 'AircraftSpecifications', schema: aircraftSpecificationsSchema },
+      { name: 'AircraftSpecification', schema: aircraftSpecificationsSchema },
     ]),
   ],
   controllers: [AircraftSpecificationsController],

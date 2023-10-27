@@ -37,7 +37,7 @@ import { RoleModule } from './role/role.module';
     AppDueModule,
     RoleModule,
   ],
-  controllers: [AppController, EnginesController],
-  providers: [AppService, EnginesService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
