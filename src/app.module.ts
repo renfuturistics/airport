@@ -8,8 +8,7 @@ import { AircraftSpecificationsModule } from './aircraft-specifications/aircraft
 import { EmployeeListModule } from './employee-list/employee-list.module';
 import { EngineDetailsModule } from './engine-details/engine-details.module';
 import { EngineControlModule } from './engine-control/engine-control.module';
-import { EnginesController } from './engines/engines.controller';
-import { EnginesService } from './engines/engines.service';
+
 import { EnginesModule } from './engines/engines.module';
 import { UtilisationModule } from './utilisation/utilisation.module';
 
