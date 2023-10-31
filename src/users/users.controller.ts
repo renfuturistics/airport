@@ -11,9 +11,9 @@ import {
 import { UsersService } from './users.service';
 import { IUser } from './users';
 import { updateUserDto } from './dto/updateUser.dto';
-import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Response, Request as ExpressRequest } from 'express';
+
 import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 @Controller('users')
