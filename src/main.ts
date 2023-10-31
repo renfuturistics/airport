@@ -4,7 +4,7 @@ import { Logger } from '@nestjs/common';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import { NestExpressApplication } from '@nestjs/platform-express';
-async function bootstrap() {
+export async function bootstrap() {
   const port = process.env.PORT;
   const allowList = ['http://localhost:3000', 'http://localhost:3002'];
 
