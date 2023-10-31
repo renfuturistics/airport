@@ -8,14 +8,20 @@ import {
   Body,
   NotFoundException,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
 import { EngineControlService } from './engine-control.service';
 import { IEngineControl } from './engine-control';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Roles } from 'src/auth/roles.decorator';
+import { RolesGuard } from 'src/auth/roles.guard';
 
 @Controller('engine-control')
 export class EngineControlController {
   constructor(private readonly engineControlService: EngineControlService) {}
 
+  @Roles('Admin', 'Superadmin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post()
   async create(@Body() engineControl: IEngineControl) {
     const result = await this.engineControlService.create(engineControl);
@@ -26,6 +32,8 @@ export class EngineControlController {
     }
   }
 
+  @Roles('Admin', 'Superadmin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Put(':id')
   async update(@Param('id') id: string, @Body() engineControl: IEngineControl) {
     const result = await this.engineControlService.update(id, engineControl);
@@ -36,6 +44,8 @@ export class EngineControlController {
     }
   }
 
+  @Roles('Admin', 'Superadmin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get(':id')
   async getById(@Param('id') id: string) {
     const result = await this.engineControlService.getById(id);
@@ -46,6 +56,8 @@ export class EngineControlController {
     }
   }
 
+  @Roles('Admin', 'Superadmin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(':id')
   async delete(@Param('id') id: string) {
     const result = await this.engineControlService.delete(id);

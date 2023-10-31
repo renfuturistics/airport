@@ -69,7 +69,7 @@ export class UsersService {
     return user;
   }
 
-  async findOne(id: string) {
+  async findOneUser(id: string) {
     try {
       const user = await this.user.findById(id).exec();
       if (!user) throw new NotFoundException('no user found by this id');
@@ -78,7 +78,9 @@ export class UsersService {
       return { success: false, error: error.message };
     }
   }
-
+  async findOne(email: string) {
+    return await this.user.findOne({ email: email });
+  }
   async update(id: string, user: updateUserDto) {
     try {
       const { first_name, last_name } = user;

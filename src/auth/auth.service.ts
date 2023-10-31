@@ -20,7 +20,7 @@ export class AuthService {
       throw new NotFoundException('email address not found');
     }
 
-    const isMatch = await bcrypt.compare(password, user.user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       throw new BadGatewayException('Invalid password please try again');

@@ -8,9 +8,13 @@ import {
   Body,
   NotFoundException,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
 import { AircraftSpecificationsService } from './aircraft-specifications.service';
 import { IAircraftSpecifications } from './aircraft-specifications';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Roles } from 'src/auth/roles.decorator';
+import { RolesGuard } from 'src/auth/roles.guard';
 
 @Controller('aircraft-specifications')
 export class AircraftSpecificationsController {
@@ -18,6 +22,8 @@ export class AircraftSpecificationsController {
     private readonly aircraftSpecificationsService: AircraftSpecificationsService,
   ) {}
 
+  @Roles('Admin', 'Superadmin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post()
   async create(@Body() aircraftSpecification: IAircraftSpecifications) {
     const result = await this.aircraftSpecificationsService.create(
@@ -30,6 +36,8 @@ export class AircraftSpecificationsController {
     }
   }
 
+  @Roles('Admin', 'Superadmin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Put(':id')
   async update(
     @Param('id') id: string,
@@ -46,6 +54,8 @@ export class AircraftSpecificationsController {
     }
   }
 
+  @Roles('Admin', 'Superadmin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get(':id')
   async getById(@Param('id') id: string) {
     const result = await this.aircraftSpecificationsService.getById(id);
@@ -56,6 +66,8 @@ export class AircraftSpecificationsController {
     }
   }
 
+  @Roles('Admin', 'Superadmin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(':id')
   async delete(@Param('id') id: string) {
     const result = await this.aircraftSpecificationsService.delete(id);
