@@ -7,7 +7,13 @@ interface User {
   username: string;
   password: string;
   roles: Types.ObjectId[];
+  email: string;
   designation: string;
+  passwordChangedAt: Date | undefined;
+  passwordResetToken: string | undefined;
+  passwordResetExpires: Date | undefined;
+  refreshToken: string | undefined | null;
+  createPasswordResetToken: () => any;
 }
 
 export interface IUser extends Document, User {}
@@ -34,6 +40,14 @@ export const userSchema = new Schema<User>(
         message: 'Invalid surname format. Please use letters only.',
       },
     },
+    email: {
+      required: [true, 'email is required'],
+      type: String,
+      unique: true,
+      lowercase: true,
+      min: 2,
+      max: 100,
+    },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true, min: 8, max: 20 },
     roles: [
@@ -43,6 +57,10 @@ export const userSchema = new Schema<User>(
       },
     ],
     designation: { type: String, required: true },
+    refreshToken: String,
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
   },
   { timestamps: true },
 );
@@ -55,3 +73,9 @@ userSchema.pre('save', async function (next) {
   const passwordHash = await bcrypt.hash(this.password, salt);
   this.password = passwordHash;
 });
+userSchema.methods.createPasswordResetToken = async function () {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  this.passwordResetToken = resetToken;
+  this.passwordResetExpires = Date.now() + 30 * 60 * 1000; // 10 minutes
+  return resetToken;
+};

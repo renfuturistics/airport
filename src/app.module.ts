@@ -16,6 +16,8 @@ import { AdsSbsModule } from './ads_sbs/ads_sbs.module';
 import { AircraftStatusModule } from './aircraft-status/aircraft-status.module';
 import { AppDueModule } from './app-due/app-due.module';
 import { RoleModule } from './role/role.module';
+import { AuthModule } from './auth/auth.module';
+import { RoleService } from './role/role.service';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -35,6 +37,7 @@ import { RoleModule } from './role/role.module';
     AircraftStatusModule,
     AppDueModule,
     RoleModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

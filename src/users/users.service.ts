@@ -57,6 +57,17 @@ export class UsersService {
       return { success: false, error: error.message };
     }
   }
+  async validateUser(id: string) {
+    const user = await this.user
+      .findById(id)
+      .select('-password')
+      .populate('roles')
+      .exec();
+    if (!user) {
+      throw new NotFoundException('User does not exist');
+    }
+    return user;
+  }
 
   async findOne(id: string) {
     try {
@@ -90,5 +101,46 @@ export class UsersService {
     } catch (error) {
       return { success: false, error: error.message };
     }
+  }
+  async updateRefreshToken(userId: string, refresh: any) {
+    try {
+      const user = await this.user.findByIdAndUpdate(
+        userId,
+        {
+          refreshToken: refresh,
+        },
+        { new: true },
+      );
+      if (!user) {
+        throw new BadRequestException('Failed to update refresh token');
+      }
+
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
+  async findUserByToken(hashedToken: string, password: string) {
+    const user = await this.user.findOne({
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gt: Date.now() },
+    });
+    if (!user) {
+      throw new Error('Token expired. Please try again');
+    }
+    user.password = password;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save();
+    return user;
+  }
+  async findById(id: string) {
+    return this.user.findById(id);
+  }
+  async findByEmail(email: string) {
+    return await this.user.findOne({ email }).select('-password');
+  }
+  async findByPhoneNumber(phoneNumber: string) {
+    return await this.user.findOne({ phoneNumber }).select('-password');
   }
 }
