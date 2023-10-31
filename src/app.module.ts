@@ -40,6 +40,6 @@ import { RoleService } from './role/role.service';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RoleService],
 })
 export class AppModule {}
