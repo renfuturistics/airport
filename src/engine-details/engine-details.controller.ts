@@ -12,9 +12,9 @@ import {
 } from '@nestjs/common';
 import { EngineDetailService } from './engine-details.service';
 import { IEngineDetail } from './engine-details';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { Roles } from '../auth/roles.decorator';
-import { RolesGuard } from '../auth/roles.guard';
+import { JwtAuthGuard } from 'src/auth//jwt-auth.guard';
+import { Roles } from 'src/auth//roles.decorator';
+import { RolesGuard } from 'src/auth//roles.guard';
 
 @Controller('engine-detail')
 export class EngineDetailController {

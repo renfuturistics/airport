@@ -14,7 +14,7 @@ import { EnginesService } from './engines.service';
 import { IEngine } from './engines';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Roles } from '../auth/roles.decorator';
-import { RolesGuard } from '../auth/roles.guard';
+import { RolesGuard } from 'src/auth//roles.guard';
 
 @Controller('engines')
 export class EnginesController {
