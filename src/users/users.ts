@@ -2,8 +2,8 @@ import { Schema, model, Document, Types } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 interface User {
-  first_name: string;
-  last_name: string;
+  name: string;
+  surname: string;
   username: string;
   password: string;
   roles: Types.ObjectId[];
@@ -20,7 +20,7 @@ export interface IUser extends Document, User {}
 
 export const userSchema = new Schema<User>(
   {
-    first_name: {
+    name: {
       type: String,
       required: true,
       validate: {
@@ -30,7 +30,7 @@ export const userSchema = new Schema<User>(
         message: 'Invalid name format. Please use letters only.',
       },
     },
-    last_name: {
+    surname: {
       type: String,
       required: true,
       validate: {

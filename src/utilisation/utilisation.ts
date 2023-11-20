@@ -1,39 +1,71 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, Document } from 'mongoose';
 
 interface Utilisation {
   acreg: string;
-  dep_date: Date;
-  arr_date: Date;
-  flt_number: string;
-  flt_folio_number: string;
+
+  flightNumber: number;
+  flightFolioNumber: number;
   origin: string;
   destination: string;
   departure: Date;
   arrival: Date;
   cycles: number;
-  entered_by: string;
-  last_edited_by: string;
-  last_updated_date: Date;
-  captain: string;
-  FirstOfficer: string;
+  enteredBy: Schema.Types.ObjectId;
+  lastEditedBy: Schema.Types.ObjectId;
+  lastUpdatedDate: Date;
+  captain: Schema.Types.ObjectId;
+  firstOfficer: Schema.Types.ObjectId;
+  comment: string;
 }
 
 export interface IUtilisation extends Document, Utilisation {}
 
 export const utilisationSchema = new Schema<Utilisation>({
-  acreg: String,
-  dep_date: Date,
-  arr_date: Date,
-  flt_number: String,
-  flt_folio_number: String,
+  acreg: {
+    type: String,
+    required: true,
+  },
+
+  flightNumber: Number,
+  flightFolioNumber: {
+    type: Number,
+    required: true,
+  },
   origin: String,
   destination: String,
-  departure: Date,
-  arrival: Date,
-  cycles: Number,
-  entered_by: String,
-  last_edited_by: String,
-  last_updated_date: Date,
-  captain: String,
-  FirstOfficer: String,
+  departure: {
+    type: Date,
+    required: true,
+  },
+  arrival: {
+    type: Date,
+    required: true,
+  },
+  cycles: {
+    type: Number,
+    default: 1,
+  },
+  enteredBy: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  },
+  lastEditedBy: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  },
+  lastUpdatedDate: Date,
+  captain: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Employee',
+  },
+
+  firstOfficer: {
+    type: Schema.Types.ObjectId,
+
+    ref: 'Employee',
+  },
+  comment: String,
 });

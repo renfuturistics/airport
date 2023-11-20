@@ -48,7 +48,7 @@ export class AuthService {
       });
       const token = tokens.token;
       const refreshToken = tokens.refreshToken;
-      return { success: true, token, refreshToken };
+      return { token, refreshToken };
     } catch (error) {
       return { success: false, error: error.message };
     }

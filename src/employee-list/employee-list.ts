@@ -2,7 +2,7 @@ import { Schema, model, Document } from 'mongoose';
 
 interface Employee {
   surname: string;
-  firstName: string;
+  name: string;
   manNo: string;
   NRC: string;
   passport: string;
@@ -20,7 +20,7 @@ export interface IEmployee extends Document, Employee {}
 export const employeeListSchema = new Schema<Employee>(
   {
     surname: { type: String, required: true },
-    firstName: { type: String, required: true },
+    name: { type: String, required: true },
     manNo: { type: String, required: true, unique: true },
     NRC: { type: String, required: true, unique: true },
     passport: String,
