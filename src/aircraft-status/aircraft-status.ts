@@ -1,74 +1,107 @@
 import { Schema, model, Document } from 'mongoose';
 
-interface AircraftStatus {
+type TimePeriod = {
+  hours: number;
+  cycles: number;
+  month: number;
+};
+
+type AircraftStatus = {
   acreg: string;
-  task_number: string;
+  taskNumber: string;
   mmreference: string;
-  pn: string;
-  sn: string;
+  partNumber: string;
+  serialNumber: string;
   description: string;
   criteria: string;
   llc: string;
   zones: string;
   location: string;
-  manualtype: string;
-  ata_chapter: string;
-  task_type: string;
-  compliance_hrs: number;
-  compliance_cycs: number;
-  compliance_cal: number;
-  interval_hrs: number;
-  interval_cycs: number;
-  interval_cal: number;
-  installation_hrs: number;
-  installation_cycs: number;
-  installation_cal: number;
-  life_limit_hrs: number;
-  life_limit_cycs: number;
-  life_limit_cal: number;
-  component_hrs: number;
-  component_cycs: number;
-  component_cal: number;
-  leniency_hrs: number;
-  leniency_cycs: number;
-  leniency_cal: number;
-  apply_leniency: boolean;
-}
+  manualType: string;
+  ataChapter: string;
+  taskType: string;
+
+  applyLeniency: boolean;
+  leniency: TimePeriod;
+  lifeTime: TimePeriod;
+  component: TimePeriod;
+  compliance: TimePeriod;
+  installation: TimePeriod;
+  interval: TimePeriod;
+};
+
 export interface IAircraftStatus extends Document, AircraftStatus {}
+
 export const aircraftStatusSchema = new Schema<AircraftStatus>(
   {
-    acreg: String,
-    task_number: String,
+    acreg: { type: String, required: true },
+    taskNumber: String,
     mmreference: String,
-    pn: String,
-    sn: String,
+    partNumber: String,
+    serialNumber: String,
     description: String,
     criteria: String,
     llc: String,
     zones: String,
     location: String,
-    manualtype: String,
-    ata_chapter: String,
-    task_type: String,
-    compliance_hrs: Number,
-    compliance_cycs: Number,
-    compliance_cal: Number,
-    interval_hrs: Number,
-    interval_cycs: Number,
-    interval_cal: Number,
-    installation_hrs: Number,
-    installation_cycs: Number,
-    installation_cal: Number,
-    life_limit_hrs: Number,
-    life_limit_cycs: Number,
-    life_limit_cal: Number,
-    component_hrs: Number,
-    component_cycs: Number,
-    component_cal: Number,
-    leniency_hrs: Number,
-    leniency_cycs: Number,
-    leniency_cal: Number,
-    apply_leniency: Boolean,
+    manualType: String,
+    ataChapter: String,
+    taskType: String,
+    lifeTime: {
+      hours: Number,
+      cycles: Number,
+      month: {
+        type: Number,
+        min: 1,
+        max: 12,
+      },
+    },
+    component: {
+      hours: Number,
+      cycles: Number,
+      month: {
+        type: Number,
+        min: 1,
+        max: 12,
+      },
+    },
+    compliance: {
+      hours: Number,
+      cycles: Number,
+      month: {
+        type: Number,
+        min: 1,
+        max: 12,
+      },
+    },
+    installation: {
+      hours: Number,
+      cycles: Number,
+      month: {
+        type: Number,
+        min: 1,
+        max: 12,
+      },
+    },
+    interval: {
+      hours: Number,
+      cycles: Number,
+      month: {
+        type: Number,
+        min: 1,
+        max: 12,
+      },
+    },
+    leniency: {
+      hours: Number,
+      cycles: Number,
+      month: {
+        type: Number,
+        min: 1,
+        max: 12,
+      },
+    },
+    applyLeniency: Boolean,
   },
   { timestamps: true },
 );

@@ -9,6 +9,7 @@ import {
   BadRequestException,
   NotFoundException,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { AircraftStatusService } from './aircraft-status.service';
 import { IAircraftStatus } from './aircraft-status';
@@ -49,18 +50,6 @@ export class AircraftStatusController {
 
   @Roles('Admin', 'Superadmin')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Get(':id')
-  async getById(@Param('id') id: string) {
-    const result = await this.aircraftStatusService.getById(id);
-    if (result.success) {
-      return result.aircraftStatus;
-    } else {
-      throw new NotFoundException(result.error);
-    }
-  }
-
-  @Roles('Admin', 'Superadmin')
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(':id')
   async delete(@Param('id') id: string) {
     const result = await this.aircraftStatusService.delete(id);
@@ -69,5 +58,14 @@ export class AircraftStatusController {
     } else {
       throw new NotFoundException(result.error);
     }
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Get(':acreg')
+  async getAircraftStatus(
+    @Param('acreg') acreg: string,
+    @Query('filter') filter?: 'hours' | 'cycles',
+  ) {
+    return await this.aircraftStatusService.getByAcreg(acreg, filter);
   }
 }
