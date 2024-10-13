@@ -18,6 +18,10 @@ import { AppDueModule } from './app-due/app-due.module';
 import { RoleModule } from './role/role.module';
 import { AuthModule } from './auth/auth.module';
 import { RoleService } from './role/role.service';
+import { PropellerModule } from './propeller/propeller.module';
+import { PropellerControlModule } from './propeller-control/propeller-control.module';
+import { ProperControlController } from './proper-control/proper-control.controller';
+import { PropellerDetailsModule } from './propeller-details/propeller-details.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -38,8 +42,11 @@ import { RoleService } from './role/role.service';
     AppDueModule,
     RoleModule,
     AuthModule,
+    PropellerModule,
+    PropellerControlModule,
+    PropellerDetailsModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, ProperControlController],
   providers: [AppService, RoleService],
 })
 export class AppModule {}

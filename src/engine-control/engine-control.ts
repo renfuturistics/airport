@@ -17,7 +17,7 @@ export interface IEngineControl extends Document, EngineControl {}
 
 export const engineControlSchema = new Schema<EngineControl>({
   eng_pn: String,
-  eng_sn: String,
+  eng_sn: { type: String, required: true, ref: 'Engines' },
   af_inst_hours: Number,
   af_inst_cycles: Number,
   eng_inst_hours: Number,

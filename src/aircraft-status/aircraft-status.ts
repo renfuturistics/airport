@@ -14,7 +14,7 @@ type AircraftStatus = {
   serialNumber: string;
   description: string;
   criteria: string;
-  llc: string;
+  llc: boolean;
   zones: string;
   location: string;
   manualType: string;
@@ -34,14 +34,14 @@ export interface IAircraftStatus extends Document, AircraftStatus {}
 
 export const aircraftStatusSchema = new Schema<AircraftStatus>(
   {
-    acreg: { type: String, required: true },
+    acreg: { type: String, required: true, ref: 'AircraftSpecification' },
     taskNumber: String,
     mmreference: String,
     partNumber: String,
     serialNumber: String,
     description: String,
     criteria: String,
-    llc: String,
+    llc: Boolean,
     zones: String,
     location: String,
     manualType: String,
